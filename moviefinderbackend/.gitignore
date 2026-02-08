@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### CONFIGURACION LOCAL Y SECRETOS ###
+# Ignorar el archivo de propiedades de desarrollo
+src/main/resources/application-dev.properties
+# Por si acaso usas variables de entorno locales
+.env
