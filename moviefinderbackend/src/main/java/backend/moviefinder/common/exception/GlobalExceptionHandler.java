@@ -54,4 +54,20 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.INTERNAL_SERVER_ERROR) // O BAD_REQUEST según prefieras
                 .body(Map.of("error", ex.getMessage() != null ? ex.getMessage() : "Error inesperado"));
     }
+    /**
+     * Maneja los errores provenientes de APIs externas (TMDB, Watchmode)
+     */
+    @ExceptionHandler(backend.moviefinder.core.exceptions.ExternalApiException.class)
+    public ResponseEntity<Map<String, String>> handleExternalApiException(backend.moviefinder.core.exceptions.ExternalApiException ex) {
+        return ResponseEntity
+                .status(ex.getStatus())
+                .body(Map.of("error", "Error en servicio externo: " + ex.getMessage()));
+    }
+
+    @ExceptionHandler(org.springframework.dao.DataIntegrityViolationException.class)
+    public ResponseEntity<Map<String, String>> handleDataIntegrityViolationException(org.springframework.dao.DataIntegrityViolationException ex) {
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT) // Status 409 Conflict
+                .body(Map.of("error", "Error de base de datos: Es posible que este registro (como el email) ya exista."));
+    }
 }
