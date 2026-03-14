@@ -6,6 +6,7 @@ import backend.moviefinder.auth.dto.RegisterRequestDTO;
 import backend.moviefinder.auth.dto.UserSummaryDTO;
 import backend.moviefinder.auth.service.AuthService;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
@@ -21,14 +22,14 @@ public class AuthController {
     private static final long COOKIE_EXPIRY = 24 * 60 * 60; // 24 horas
 
     @PostMapping("/register")
-    public ResponseEntity<AuthResponseDTO> register(@RequestBody RegisterRequestDTO request, HttpServletResponse response) {
+    public ResponseEntity<AuthResponseDTO> register(@Valid @RequestBody RegisterRequestDTO request, HttpServletResponse response) {
         AuthResponseDTO result = authService.register(request);
         setCookie(response, result.getToken());
         return ResponseEntity.ok(result);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponseDTO> login(@RequestBody LoginRequestDTO request, HttpServletResponse response) {
+    public ResponseEntity<AuthResponseDTO> login(@Valid @RequestBody LoginRequestDTO request, HttpServletResponse response) {
         AuthResponseDTO result = authService.login(request);
         setCookie(response, result.getToken());
         return ResponseEntity.ok(result);
