@@ -29,9 +29,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(
-            HttpServletRequest request,     // Quitamos @NonNull
-            HttpServletResponse response,   // Quitamos @NonNull
-            FilterChain filterChain         // Quitamos @NonNull
+            HttpServletRequest request,
+            HttpServletResponse response,
+            FilterChain filterChain
     ) throws ServletException, IOException {
 
         String jwt = null;
