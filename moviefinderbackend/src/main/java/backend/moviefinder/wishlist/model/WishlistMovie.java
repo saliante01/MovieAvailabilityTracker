@@ -7,7 +7,8 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "wishlist_movies") // Cambiamos el nombre de la tabla
+@Table(name = "wishlist_movies",
+       uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "tmdb_id"}))
 public class WishlistMovie {
 
     @Id

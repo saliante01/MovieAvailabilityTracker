@@ -22,6 +22,7 @@ public class WatchmodeSourceDto {
     @JsonProperty("web_url")
     private String webUrl;
 
-    // Calidad de video (ej. "4K", "HD")
     private String format;
+
+    private Double price;
 }
